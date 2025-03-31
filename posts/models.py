@@ -9,3 +9,8 @@ class Post(models.Model):
     body = models.TextField()
     liked = models.ManyToManyField(User, blank=True)
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def__str__(self):
+        return str(self.title)
