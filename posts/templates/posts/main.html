@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block script %}
+    <script src="{% static 'posts/main.js' %}" defer></script>
 {% endblock script %}
 
 {% block title %}
