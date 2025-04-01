@@ -10,5 +10,5 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
-    def str(self):
+    def __str__(self):
         return str(self.title)
