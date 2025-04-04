@@ -90,7 +90,7 @@ def like_unlike_post(request):
 
 
 def update_post(request, pk):
-    obj =Post.objects.get(pk=pk)
+    obj = Post.objects.get(pk=pk)
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         new_title = request.POST.get('title')
         new_body = request.POST.get('body')
