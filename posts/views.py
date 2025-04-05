@@ -1,6 +1,6 @@
 from pydoc import visiblename
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Photo
 from django.http import JsonResponse, HttpResponse
 from .forms import PostForm
 from profiles.models import Profile
@@ -26,25 +26,24 @@ def post_list_and_create(request):
             })
     context = {
         'form': form,
-        
     }
     return render(request, 'posts/main.html', context)
 
+
 def post_detail(request, pk):
     obj = Post.objects.get(pk=pk)
-    form= PostForm()
-    
+    form = PostForm()
+
     context = {
         'obj': obj,
         'form': form,
-        
     }
-    
     return render(request, 'posts/detail.html', context)
+
 
 def load_post_data_view(request, num_posts):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        
+
         visible = 3
         upper = num_posts
         lower = upper - visible
@@ -65,6 +64,7 @@ def load_post_data_view(request, num_posts):
             data.append(item)
         return JsonResponse({'data': data[lower:upper], 'size': size})
 
+
 def post_detail_data_view(request, pk):
     obj = Post.objects.get(pk=pk)
     data = {
@@ -73,8 +73,10 @@ def post_detail_data_view(request, pk):
         'body': obj.body,
         'author': obj.author.user.username,
         'logged_in': request.user.username,
+
     }
     return JsonResponse({'data': data})
+
 
 def like_unlike_post(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -98,20 +100,21 @@ def update_post(request, pk):
         obj.body = new_body
         obj.save()
     return JsonResponse({
-        'title':new_title,
-        'body':new_body,
+        'title': new_title,
+        'body': new_body,
     })
-    
+
 
 def delete_post(request, pk):
-    obj =Post.objects.get(pk=pk)
+    obj = Post.objects.get(pk=pk)
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         obj.delete()
     return JsonResponse({})
 
+
 def image_upload_view(request):
     if request.method == 'POST':
-        img = request.FILES.get('flie')
+        img = request.FILES.get('file')
         new_post_id = request.POST.get('new_post_id')
         post = Post.objects.get(id=new_post_id)
         Photo.objects.create(image=img, post=post)
