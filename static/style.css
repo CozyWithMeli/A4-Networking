@@ -11,3 +11,29 @@
 .dz:hover {
     background-color: aliceblue !important;
 }
+
+.home-button {
+    background-color: #ffccdd;  
+    border: 2px solid #f7a8b8;  
+    border-radius: 0.25rem;     
+    color: black;               
+    font-weight: bold;          
+  }
+  
+  .home-button:hover {
+    background-color: #fbb6c5;  
+    color: white;
+  }
+
+  .profile-button {
+    background-color: #d63384; 
+    border: 2px solid #ffccdd; 
+    color: black;
+    font-weight: bold;
+    border-radius: 0.25rem;
+  }
+  
+  .profile-button:hover {
+    background-color: #c2186b; 
+    color: white;
+  }
